@@ -1,24 +1,982 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ascend-web-resume</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <title>John Doe - Full Stack Developer</title>
+    <meta name="description" content="Professional Portfolio of John Doe - Full Stack Developer" />
+    <meta name="author" content="John Doe" />
 
-    <meta property="og:title" content="ascend-web-resume" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --primary-color: #6366f1;
+        --secondary-color: #8b5cf6;
+        --accent-color: #06b6d4;
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --border-color: #e5e7eb;
+        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      }
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+      [data-theme="dark"] {
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --bg-primary: #111827;
+        --bg-secondary: #1f2937;
+        --border-color: #374151;
+        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background-color: var(--bg-primary);
+        transition: all 0.3s ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Navigation */
+      .navbar {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+
+      [data-theme="dark"] .navbar {
+        background-color: rgba(17, 24, 39, 0.95) !important;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary-color) !important;
+      }
+
+      .navbar-nav .nav-link {
+        font-weight: 500;
+        color: var(--text-primary) !important;
+        margin: 0 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: var(--primary-color) !important;
+        transform: translateY(-2px);
+      }
+
+      /* Dark Mode Toggle */
+      .theme-toggle {
+        background: none;
+        border: 2px solid var(--border-color);
+        border-radius: 50px;
+        padding: 0.5rem 1rem;
+        color: var(--text-primary);
+        transition: all 0.3s ease;
+      }
+
+      .theme-toggle:hover {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        animation: slideInLeft 1s ease-out;
+      }
+
+      .hero .lead {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        animation: slideInRight 1s ease-out 0.3s both;
+      }
+
+      .hero .btn-cta {
+        background: white;
+        color: var(--primary-color);
+        border: none;
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      .hero .btn-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Section Styling */
+      .section {
+        padding: 5rem 0;
+        background-color: var(--bg-primary);
+      }
+
+      .section:nth-child(even) {
+        background-color: var(--bg-secondary);
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        border-radius: 2px;
+      }
+
+      /* Skills Cards */
+      .skill-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 100%;
+        box-shadow: var(--shadow);
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px) rotateY(5deg);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary-color);
+      }
+
+      .skill-card i {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+      }
+
+      /* Experience Cards */
+      .experience-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .experience-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      }
+
+      .experience-card:hover {
+        transform: translateX(10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Project Cards with 3D Effect */
+      .project-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        height: 100%;
+        box-shadow: var(--shadow);
+        perspective: 1000px;
+      }
+
+      .project-card:hover {
+        transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .project-card-inner {
+        transition: all 0.4s ease;
+        transform-style: preserve-3d;
+      }
+
+      .project-card:hover .project-card-inner {
+        transform: rotateY(5deg);
+      }
+
+      .project-image {
+        height: 200px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+      }
+
+      .project-content {
+        padding: 1.5rem;
+      }
+
+      /* Contact Form */
+      .contact-form {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .form-control {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+      }
+
+      .form-control:focus {
+        background-color: var(--bg-secondary);
+        border-color: var(--primary-color);
+        color: var(--text-primary);
+        box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.25);
+      }
+
+      /* Social Links */
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        margin: 0 0.5rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .social-links a:hover {
+        transform: translateY(-5px) scale(1.1);
+        background: var(--secondary-color);
+      }
+
+      /* Animations */
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        
+        .hero .lead {
+          font-size: 1.2rem;
+        }
+        
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+    </style>
   </head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body data-theme="light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#home">John Doe</a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#experience">Experience</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <button class="theme-toggle ms-3" id="themeToggle">
+                <i class="fas fa-moon"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content">
+              <h1>John Doe</h1>
+              <p class="lead">Full Stack Developer & UI/UX Designer</p>
+              <p class="mb-4">Crafting beautiful, functional, and user-friendly digital experiences with modern technologies.</p>
+              <a href="#contact" class="btn btn-cta">Get In Touch</a>
+              <a href="/resume.pdf" class="btn btn-outline-light ms-3" download>
+                <i class="fas fa-download"></i> Download Resume
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6 text-center">
+            <div class="hero-image" data-aos="fade-left" data-aos-delay="800">
+              <i class="fas fa-code" style="font-size: 15rem; opacity: 0.1;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">About Me</h2>
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-right">
+            <h3>Hello! I'm John Doe</h3>
+            <p class="text-muted">A passionate Full Stack Developer with 5+ years of experience in creating exceptional digital experiences. I specialize in modern web technologies and have a keen eye for design.</p>
+            <p class="text-muted">When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.</p>
+            
+            <div class="row mt-4">
+              <div class="col-6">
+                <h4>50+</h4>
+                <p class="text-muted">Projects Completed</p>
+              </div>
+              <div class="col-6">
+                <h4>5+</h4>
+                <p class="text-muted">Years Experience</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="about-image text-center">
+              <div style="width: 300px; height: 300px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-user" style="font-size: 8rem; color: white; opacity: 0.8;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Skills & Technologies</h2>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-card">
+              <i class="fab fa-react"></i>
+              <h4>React</h4>
+              <p class="text-muted">Building interactive user interfaces with modern React patterns and hooks.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-card">
+              <i class="fab fa-node-js"></i>
+              <h4>Node.js</h4>
+              <p class="text-muted">Server-side development with Express.js and various databases.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="skill-card">
+              <i class="fas fa-database"></i>
+              <h4>Databases</h4>
+              <p class="text-muted">Experience with MongoDB, PostgreSQL, and Firebase.</p>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="skill-card">
+              <i class="fab fa-aws"></i>
+              <h4>Cloud Services</h4>
+              <p class="text-muted">Deployment and hosting with AWS, Vercel, and Netlify.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Experience</h2>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="experience-card" data-aos="fade-up" data-aos-delay="100">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h4>Senior Full Stack Developer</h4>
+                  <h5 class="text-primary">TechCorp Solutions</h5>
+                  <p class="text-muted">Led development of enterprise web applications using React, Node.js, and AWS. Managed a team of 4 developers and improved application performance by 40%.</p>
+                </div>
+                <span class="badge bg-primary">2021 - Present</span>
+              </div>
+            </div>
+            
+            <div class="experience-card" data-aos="fade-up" data-aos-delay="200">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h4>Full Stack Developer</h4>
+                  <h5 class="text-primary">Digital Innovations Inc.</h5>
+                  <p class="text-muted">Developed and maintained multiple client projects using modern web technologies. Collaborated with design teams to implement pixel-perfect responsive designs.</p>
+                </div>
+                <span class="badge bg-primary">2019 - 2021</span>
+              </div>
+            </div>
+            
+            <div class="experience-card" data-aos="fade-up" data-aos-delay="300">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h4>Frontend Developer</h4>
+                  <h5 class="text-primary">StartupHub</h5>
+                  <p class="text-muted">Built responsive web applications and implemented modern UI/UX designs. Worked closely with backend developers to integrate APIs and optimize user experience.</p>
+                </div>
+                <span class="badge bg-primary">2018 - 2019</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="project-card">
+              <div class="project-card-inner">
+                <div class="project-image">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="project-content">
+                  <h4>E-Commerce Platform</h4>
+                  <p class="text-muted">Full-stack e-commerce solution built with React, Node.js, and Stripe integration.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                      <span class="badge bg-primary me-1">React</span>
+                      <span class="badge bg-secondary me-1">Node.js</span>
+                      <span class="badge bg-success">MongoDB</span>
+                    </div>
+                    <div>
+                      <a href="#" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#projectModal1">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      <a href="#" class="btn btn-sm btn-outline-secondary">
+                        <i class="fab fa-github"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="project-card">
+              <div class="project-card-inner">
+                <div class="project-image">
+                  <i class="fas fa-tasks"></i>
+                </div>
+                <div class="project-content">
+                  <h4>Task Management App</h4>
+                  <p class="text-muted">Collaborative task management tool with real-time updates and team collaboration features.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                      <span class="badge bg-primary me-1">Vue.js</span>
+                      <span class="badge bg-secondary me-1">Express</span>
+                      <span class="badge bg-warning">Socket.io</span>
+                    </div>
+                    <div>
+                      <a href="#" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#projectModal2">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      <a href="#" class="btn btn-sm btn-outline-secondary">
+                        <i class="fab fa-github"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="project-card">
+              <div class="project-card-inner">
+                <div class="project-image">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="project-content">
+                  <h4>Analytics Dashboard</h4>
+                  <p class="text-muted">Interactive dashboard with data visualization and reporting capabilities for business insights.</p>
+                  <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                      <span class="badge bg-primary me-1">React</span>
+                      <span class="badge bg-secondary me-1">D3.js</span>
+                      <span class="badge bg-info">Python</span>
+                    </div>
+                    <div>
+                      <a href="#" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#projectModal3">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      <a href="#" class="btn btn-sm btn-outline-secondary">
+                        <i class="fab fa-github"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <div class="contact-form" data-aos="fade-up" data-aos-delay="200">
+              <form id="contactForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="subject" required>
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" id="message" rows="5" required></textarea>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                  </button>
+                </div>
+              </form>
+            </div>
+            
+            <div class="text-center mt-5">
+              <h4>Connect With Me</h4>
+              <div class="social-links mt-3">
+                <a href="mailto:john.doe@email.com">
+                  <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/johndoe">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/johndoe">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com/johndoe">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Modals -->
+    <div class="modal fade" id="projectModal1" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">E-Commerce Platform</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <div style="height: 300px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-shopping-cart" style="font-size: 5rem; color: white; opacity: 0.8;"></i>
+              </div>
+            </div>
+            <h6>Project Overview</h6>
+            <p>A comprehensive e-commerce platform featuring user authentication, product catalog, shopping cart, payment integration, and admin dashboard. Built with modern technologies to ensure scalability and performance.</p>
+            
+            <h6>Key Features</h6>
+            <ul>
+              <li>User registration and authentication</li>
+              <li>Product catalog with search and filtering</li>
+              <li>Shopping cart and wishlist functionality</li>
+              <li>Secure payment processing with Stripe</li>
+              <li>Order tracking and management</li>
+              <li>Admin dashboard for inventory management</li>
+            </ul>
+            
+            <h6>Technologies Used</h6>
+            <div>
+              <span class="badge bg-primary me-2">React</span>
+              <span class="badge bg-secondary me-2">Node.js</span>
+              <span class="badge bg-success me-2">MongoDB</span>
+              <span class="badge bg-info me-2">Stripe API</span>
+              <span class="badge bg-warning">JWT Authentication</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-primary">
+              <i class="fas fa-external-link-alt me-2"></i>Live Demo
+            </a>
+            <a href="#" class="btn btn-outline-secondary">
+              <i class="fab fa-github me-2"></i>View Code
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="projectModal2" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Task Management App</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <div style="height: 300px; background: linear-gradient(135deg, var(--secondary-color), var(--accent-color)); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-tasks" style="font-size: 5rem; color: white; opacity: 0.8;"></i>
+              </div>
+            </div>
+            <h6>Project Overview</h6>
+            <p>A collaborative task management application that enables teams to organize, track, and complete projects efficiently. Features real-time updates and seamless team collaboration.</p>
+            
+            <h6>Key Features</h6>
+            <ul>
+              <li>Real-time task updates with Socket.io</li>
+              <li>Kanban board interface</li>
+              <li>Team collaboration and comments</li>
+              <li>File attachments and sharing</li>
+              <li>Progress tracking and reporting</li>
+              <li>Mobile-responsive design</li>
+            </ul>
+            
+            <h6>Technologies Used</h6>
+            <div>
+              <span class="badge bg-primary me-2">Vue.js</span>
+              <span class="badge bg-secondary me-2">Express.js</span>
+              <span class="badge bg-warning me-2">Socket.io</span>
+              <span class="badge bg-success me-2">PostgreSQL</span>
+              <span class="badge bg-info">Redis</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-primary">
+              <i class="fas fa-external-link-alt me-2"></i>Live Demo
+            </a>
+            <a href="#" class="btn btn-outline-secondary">
+              <i class="fab fa-github me-2"></i>View Code
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="projectModal3" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Analytics Dashboard</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <div style="height: 300px; background: linear-gradient(135deg, var(--accent-color), var(--primary-color)); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-chart-line" style="font-size: 5rem; color: white; opacity: 0.8;"></i>
+              </div>
+            </div>
+            <h6>Project Overview</h6>
+            <p>An interactive analytics dashboard that transforms complex data into actionable insights through beautiful visualizations and comprehensive reporting tools.</p>
+            
+            <h6>Key Features</h6>
+            <ul>
+              <li>Interactive data visualizations with D3.js</li>
+              <li>Real-time data updates</li>
+              <li>Customizable dashboard layouts</li>
+              <li>Export capabilities (PDF, Excel)</li>
+              <li>User role-based access control</li>
+              <li>Mobile-optimized charts</li>
+            </ul>
+            
+            <h6>Technologies Used</h6>
+            <div>
+              <span class="badge bg-primary me-2">React</span>
+              <span class="badge bg-secondary me-2">D3.js</span>
+              <span class="badge bg-info me-2">Python</span>
+              <span class="badge bg-success me-2">FastAPI</span>
+              <span class="badge bg-warning">Pandas</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-primary">
+              <i class="fas fa-external-link-alt me-2"></i>Live Demo
+            </a>
+            <a href="#" class="btn btn-outline-secondary">
+              <i class="fab fa-github me-2"></i>View Code
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+      <div class="container">
+        <p>&copy; 2024 John Doe. All rights reserved.</p>
+        <p class="small text-muted">Built with ❤️ using Bootstrap 5 and modern web technologies.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+      });
+
+      // Dark Mode Toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
+      const icon = themeToggle.querySelector('i');
+
+      // Check for saved theme preference or default to 'light'
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      body.setAttribute('data-theme', currentTheme);
+      
+      if (currentTheme === 'dark') {
+        icon.classList.replace('fa-moon', 'fa-sun');
+      }
+
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        if (newTheme === 'dark') {
+          icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+          icon.classList.replace('fa-sun', 'fa-moon');
+        }
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Contact form submission
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(this);
+        const name = formData.get('name') || document.getElementById('name').value;
+        const email = formData.get('email') || document.getElementById('email').value;
+        const subject = formData.get('subject') || document.getElementById('subject').value;
+        const message = formData.get('message') || document.getElementById('message').value;
+        
+        // Simulate form submission
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Message Sent!';
+          setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            this.reset();
+          }, 2000);
+        }, 1500);
+        
+        console.log('Form submitted:', { name, email, subject, message });
+      });
+
+      // Navbar background on scroll
+      window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+          navbar.style.background = body.getAttribute('data-theme') === 'dark' 
+            ? 'rgba(17, 24, 39, 0.98)' 
+            : 'rgba(255, 255, 255, 0.98)';
+        } else {
+          navbar.style.background = body.getAttribute('data-theme') === 'dark' 
+            ? 'rgba(17, 24, 39, 0.95)' 
+            : 'rgba(255, 255, 255, 0.95)';
+        }
+      });
+
+      // Add active class to navigation links
+      window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.clientHeight;
+          if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
